@@ -22,6 +22,7 @@ namespace TutoringGame
 
         Random rand = new Random();
 
+
         /** Properties for the Variables */
         public int Health { get; set; }
         public int Attack { get; set; }

@@ -20,3 +20,6 @@ C:\Users\CRCUser\Desktop\The Vault\TutoringGame\TutoringGame\obj\Debug\TutoringG
 C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\bin\Debug\TutoringGame.exe.config
 C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\obj\Debug\TutoringGame.exe
 C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\obj\Debug\TutoringGame.pdb
+C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\bin\Debug\TutoringGame.exe
+C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\bin\Debug\TutoringGame.pdb
+C:\Users\Josaiah\Desktop\TutoringGame\TutoringGame\obj\Debug\TutoringGame.csprojResolveAssemblyReference.cache

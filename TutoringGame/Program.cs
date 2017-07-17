@@ -1,4 +1,15 @@
-﻿using System;
+﻿/** Josiah Reynolds
+ * 
+ * designed September 2016
+ * found again 7/8/2017
+ * work restarted on 7/8/2017
+ * maintained and worked on so far by Josiah Reynolds, and Joshua Herndon
+ * 
+ * 7/9 - program looked over and documentation
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +17,20 @@ using System.Threading.Tasks;
 
 namespace TutoringGame
 {
+    /// 
+    /// This is the class that holds the Main and where all the game actions happen.
+    /// 
     public class Program
     {
-
+        /// 
+        /// The Main Method
+        /// 
         public static void Main(string[] args)
         {
+            /** Random Number Generator */
             Random rand = new Random();
-            /** Possible Variables that will be required for either game mode */
+
+            /** Variables for... (map, player stats, ...) */
             int rows;
             int columns;
             int player1Attack;
@@ -24,12 +42,16 @@ namespace TutoringGame
             String player1Class;
             String title;
 
+            /** Instance of Player */
             Player player1 = new Player();
+
+            /** Instance of Map */
             Map worldmap = new Map();
 
+            /** Flag for game victory */
             Boolean wonGame = false;
 
-            // For Background work
+            /** Instances of each player-class */
             Player xswordsman = new Player("Swordsman");
             Player xberserker = new Player("Berserker");
             Player xarcher = new Player("Archer");
@@ -37,45 +59,16 @@ namespace TutoringGame
             Player xmage = new Player("Mage");
             Enemy xenemey = new Enemy();
 
-            /** Start the Basic game. */
+            /** Introduction to the game. */
             Console.Clear();
-            Console.WriteLine("Welcome to The Tutoring RPG...");
+            //Console.WriteLine("Welcome to The Tutoring RPG...");
+            Console.WriteLine("----- Old - Timey Text RPG -----");
 
-            /** Build the Map. */
-            Console.WriteLine("What map do you want to play on?");
+            /** Creation of the map for game. */
+            Console.WriteLine("What game-map would you like to play on?");
             Console.WriteLine("\n1. Sagridell 9th Flank\n2. Sagridell Inner Flank\n3. Sagridell King's Chamber\n4. Custom-made");
+            // Switch statement to decide the type of map
             switch (Console.ReadLine().ToUpper()){
-                case "CUSTOM":
-                case "4":
-                    Console.WriteLine("How many rows on game map? (As an Integer < 20)");
-                    rows = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("How many columns on game map? (As an Integer < 20)");
-                    columns = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("What is the title of game map? (As a String)");
-                    title = Console.ReadLine();
-                    worldmap = new Map(rows, columns, title);
-                    // Setting the Tile Types...
-                    for(int i = 0; i < rows; i++)
-                    {
-                        for(int j = 0; j < columns; j++)
-                        {
-                            int choice = rand.Next(3);
-                            switch(choice)
-                            {
-                                case 0:
-                                    worldmap.TileAt(i, j).Type = "MONSTER";
-                                    break;
-                                case 1:
-                                    worldmap.TileAt(i, j).Type = "ITEM";
-                                    break;
-                                case 2:
-                                    worldmap.TileAt(i, j).Type = "NORMAL";
-                                    break;
-                            }
-                        }
-                    }
-                    break;
-
                 case "1":
                 case "SAGRIDELL 9TH FLANK":
                     worldmap = new Map(5, 8);
@@ -104,62 +97,93 @@ namespace TutoringGame
 
                 case "2":
                 case "SAGRIDELL INNER CIRCLE":
-                            worldmap = new Map(7, 12);
-                            worldmap.Title = "Sagridell Inner Circle";
-                            worldmap.TileAt(3, 4).Type = "MONSTER";
-                            worldmap.TileAt(3, 8).Type = "MONSTER";
-                            worldmap.TileAt(4, 4).Type = "MONSTER";
-                            worldmap.TileAt(4, 8).Type = "MONSTER";
-                            worldmap.TileAt(5, 0).Type = "MONSTER";
-                            worldmap.TileAt(5, 1).Type = "MONSTER";
-                            worldmap.TileAt(5, 2).Type = "MONSTER";
-                            worldmap.TileAt(5, 3).Type = "MONSTER";
-                            worldmap.TileAt(5, 4).Type = "MONSTER";
-                            worldmap.TileAt(5, 5).Type = "MONSTER";
-                            worldmap.TileAt(5, 8).Type = "MONSTER";
-                            worldmap.TileAt(6, 2).Type = "MONSTER";
-                            worldmap.TileAt(6, 3).Type = "MONSTER";
-                            worldmap.TileAt(6, 10).Type = "MONSTER";
-                            worldmap.TileAt(6, 11).Type = "MONSTER";
-                            worldmap.TileAt(4, 9).Type = "MONSTER";
-                            worldmap.TileAt(2, 9).Type = "MONSTER";
-                            worldmap.TileAt(0, 9).Type = "MONSTER";
-                            worldmap.TileAt(1, 9).Type = "MONSTER";
-                            worldmap.TileAt(4, 10).Type = "MONSTER";
-                            worldmap.TileAt(2, 0).Type = "MONSTER";
-                            worldmap.TileAt(2, 1).Type = "MONSTER";
-                            worldmap.TileAt(2, 2).Type = "MONSTER";
-                            worldmap.TileAt(2, 3).Type = "MONSTER";
-                            worldmap.TileAt(2, 4).Type = "MONSTER";
-                            worldmap.TileAt(2, 5).Type = "MONSTER";
-                            worldmap.TileAt(2, 6).Type = "MONSTER";
-                            worldmap.TileAt(2, 8).Type = "MONSTER";
-                            worldmap.TileAt(1, 4).Type = "MONSTER";
-                            worldmap.TileAt(0, 6).Type = "MONSTER";
-                            worldmap.TileAt(1, 7).Type = "MONSTER";
-                            worldmap.TileAt(0, 4).Type = "MONSTER";
-                            worldmap.TileAt(3, 5).Type = "ITEM";
-                            worldmap.TileAt(3, 6).Type = "ITEM";
-                            worldmap.TileAt(3, 7).Type = "ITEM";
-                            worldmap.TileAt(4, 5).Type = "ITEM";
-                            worldmap.TileAt(4, 6).Type = "ITEM";
-                            worldmap.TileAt(4, 7).Type = "ITEM";
-                            worldmap.TileAt(4, 7).Type = "BOSS";
-                            break;
+                    worldmap = new Map(7, 12);
+                    worldmap.Title = "Sagridell Inner Circle";
+                    worldmap.TileAt(3, 4).Type = "MONSTER";
+                    worldmap.TileAt(3, 8).Type = "MONSTER";
+                    worldmap.TileAt(4, 4).Type = "MONSTER";
+                    worldmap.TileAt(4, 8).Type = "MONSTER";
+                    worldmap.TileAt(5, 0).Type = "MONSTER";
+                    worldmap.TileAt(5, 1).Type = "MONSTER";
+                    worldmap.TileAt(5, 2).Type = "MONSTER";
+                    worldmap.TileAt(5, 3).Type = "MONSTER";
+                    worldmap.TileAt(5, 4).Type = "MONSTER";
+                    worldmap.TileAt(5, 5).Type = "MONSTER";
+                    worldmap.TileAt(5, 8).Type = "MONSTER";
+                    worldmap.TileAt(6, 2).Type = "MONSTER";
+                    worldmap.TileAt(6, 3).Type = "MONSTER";
+                    worldmap.TileAt(6, 10).Type = "MONSTER";
+                    worldmap.TileAt(6, 11).Type = "MONSTER";
+                    worldmap.TileAt(4, 9).Type = "MONSTER";
+                    worldmap.TileAt(2, 9).Type = "MONSTER";
+                    worldmap.TileAt(0, 9).Type = "MONSTER";
+                    worldmap.TileAt(1, 9).Type = "MONSTER";
+                    worldmap.TileAt(4, 10).Type = "MONSTER";
+                    worldmap.TileAt(2, 0).Type = "MONSTER";
+                    worldmap.TileAt(2, 1).Type = "MONSTER";
+                    worldmap.TileAt(2, 2).Type = "MONSTER";
+                    worldmap.TileAt(2, 3).Type = "MONSTER";
+                    worldmap.TileAt(2, 4).Type = "MONSTER";
+                    worldmap.TileAt(2, 5).Type = "MONSTER";
+                    worldmap.TileAt(2, 6).Type = "MONSTER";
+                    worldmap.TileAt(2, 8).Type = "MONSTER";
+                    worldmap.TileAt(1, 4).Type = "MONSTER";
+                    worldmap.TileAt(0, 6).Type = "MONSTER";
+                    worldmap.TileAt(1, 7).Type = "MONSTER";
+                    worldmap.TileAt(0, 4).Type = "MONSTER";
+                    worldmap.TileAt(3, 5).Type = "ITEM";
+                    worldmap.TileAt(3, 6).Type = "ITEM";
+                    worldmap.TileAt(3, 7).Type = "ITEM";
+                    worldmap.TileAt(4, 5).Type = "ITEM";
+                    worldmap.TileAt(4, 6).Type = "ITEM";
+                    worldmap.TileAt(4, 7).Type = "ITEM";
+                    worldmap.TileAt(4, 7).Type = "BOSS";
+                    break;
 
-                    case "3":
-                    case "SAGRIDELL KING'S CHAMBER":
-                            worldmap = new Map(9, 16);
-                            worldmap.Title = "Sagridell King's Chamber";
-                            for(int s = 0; s < 9; s++)
+                case "3":
+                case "SAGRIDELL KING'S CHAMBER":
+                    worldmap = new Map(9, 16);
+                    worldmap.Title = "Sagridell King's Chamber";
+                    for(int s = 0; s < 9; s++)
+                    {
+                        for (int t = 0; t < 16; t++)
+                        {
+                            worldmap.TileAt(s, t).Type = "MONSTER";
+                        }
+                    }
+                    worldmap.TileAt(4, 7).Type = "BOSS";
+                    break;
+
+                case "CUSTOM":
+                case "4":
+                    Console.WriteLine("How many rows on game map? (As an Integer < 20)");
+                    rows = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("How many columns on game map? (As an Integer < 20)");
+                    columns = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("What is the title of game map? (As a String)");
+                    title = Console.ReadLine();
+                    worldmap = new Map(rows, columns, title);
+                    // Setting the Tile Types...
+                    for (int i = 0; i < rows; i++)
+                    {
+                        for (int j = 0; j < columns; j++)
+                        {
+                            int choice = rand.Next(3);
+                            switch (choice)
                             {
-                                for (int t = 0; t < 16; t++)
-                                {
-                                    worldmap.TileAt(s, t).Type = "MONSTER";
-                                }
+                                case 0:
+                                    worldmap.TileAt(i, j).Type = "MONSTER";
+                                    break;
+                                case 1:
+                                    worldmap.TileAt(i, j).Type = "ITEM";
+                                    break;
+                                case 2:
+                                    worldmap.TileAt(i, j).Type = "NORMAL";
+                                    break;
                             }
-                            worldmap.TileAt(4, 7).Type = "BOSS";
-                            break;
+                        }
+                    }
+                    break;
             }
 
             if (worldmap == null)
